@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memeless</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Courier New', monospace;
+            color: #000;
+        }
+
+        h1 {
+            font-size: 4rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .ca-container {
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .ca-container:hover {
+            background: rgba(0, 0, 0, 0.06);
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .ca-label {
+            font-size: 0.75rem;
+            color: #999;
+            margin-bottom: 0.5rem;
+        }
+
+        .ca {
+            font-size: 0.9rem;
+            color: #444;
+            word-break: break-all;
+            user-select: all;
+        }
+
+        .copied {
+            position: fixed;
+            bottom: 2rem;
+            background: #000;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            pointer-events: none;
+        }
+
+        .copied.show {
+            opacity: 1;
+        }
+
+        .gallery {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .gallery-title {
+            font-size: 0.75rem;
+            color: #999;
+            margin-bottom: 1rem;
+            text-transform: lowercase;
+        }
+
+        .meme-grid {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .meme {
+            width: 120px;
+            height: 120px;
+            background: url('uk.png') center/cover;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .ca {
+                font-size: 0.7rem;
+            }
+
+            .ca-container {
+                padding: 1rem;
+                margin: 0 1rem;
+            }
+
+            .meme {
+                width: 80px;
+                height: 80px;
+            }
+
+            .gallery {
+                padding: 1rem;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Memeless</h1>
+    
+    <div class="ca-container" onclick="copyCA()">
+        <div class="ca">CA</div>
+    </div>
+
+    <div class="gallery">
+        <div class="gallery-title">meme gallery</div>
+        <div class="meme-grid">
+            <div class="meme"></div>
+            <div class="meme"></div>
+            <div class="meme"></div>
+            <div class="meme"></div>
+            <div class="meme"></div>
+            <div class="meme"></div>
+        </div>
+    </div>
+
+    <div class="copied" id="copied">Copied!</div>
+
+    <script>
+        function copyCA() {
+            const ca = 'CA';
+            navigator.clipboard.writeText(ca);
+            
+            const copied = document.getElementById('copied');
+            copied.classList.add('show');
+            setTimeout(() => copied.classList.remove('show'), 1500);
+        }
+    </script>
+</body>
+</html>
